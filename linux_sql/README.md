@@ -65,6 +65,39 @@ Technologies used listed :
 # Implementation:
 To begin the project, we started by setting up our GitHub repo to save every version of our project. Then we continued by setting up a docker instance for us to store our database. Then we proceeded to set up our tables where we would store the data received from our nodes. The next step was to code our script to fetch the required data from said nodes (host_info and host_usage). Once everything was verified and working, the crontab was implemented to periodically get the resource usage of the node. We could then proceed to create the SQL queries to filter the data and simplify the information received. Finally, we created the README file.
 
+#Scripts:
+- **psql_docker.sh**
+  
+    This scripts creates, start, or stop the docker container that holds the PSQL database
+  
+    ```./scripts/psql_docker.sh create|start|stop [db_username][db_password] ```
+
+
+- **host_info.sh**
+
+  Retrieves the information of the node's hardware specification : formatted as ; hostname, cpu_number, cpu_architecture, cpu_model, cpu_mhz, l2_cache, total_memory, and timestamp and inserts it into the PSQL database.
+  
+    ```./scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password ```
+
+
+- **host_usage.sh**
+
+    Retrieves the current use of the node's hardware : formatted as ; timestamp, hostname, free_memory, cpu_idle, cpu_kernel, disk_io, and disk_available
+
+    ```./scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password ```
+
+
+- **ddl.sql**
+  
+    The Sql file changes to host agent database then creates host_info and host_usage tables
+  
+    ```psql -h localhost -U postgres -d host_agent -f sql/ddl.sql```
+
+
+- **Crontab** 
+  
+    The Cron Job automates the collection of the nodes hardware usage per 1 minute intervals and logs the stout into /tmp/host_usage.log
+
 # Database Modeling:
 * host_info
   - id : SERIAL (PRIMARY KEY)
@@ -85,6 +118,7 @@ To begin the project, we started by setting up our GitHub repo to save every ver
   - cpu_kernel : INT
   - disk_io : INT
   - disk_available : INT
+  
 # Tests:
 1. The psql_docker.sh script was tested by building and running the container and using docker ps -a to verify that this was the case. Tests were also done to make sure all the arguments were provided.
 
