@@ -62,10 +62,10 @@ Technologies used listed :
     psql -h localhost -U postgres -d host_agent -f sql/queries.sql
 ```
 
-#Implementation:
+# Implementation:
 To begin the project, we started by setting up our GitHub repo to save every version of our project. Then we continued by setting up a docker instance for us to store our database. Then we proceeded to set up our tables where we would store the data received from our nodes. The next step was to code our script to fetch the required data from said nodes (host_info and host_usage). Once everything was verified and working, the crontab was implemented to periodically get the resource usage of the node. We could then proceed to create the SQL queries to filter the data and simplify the information received. Finally, we created the README file.
 
-#Database Modeling:
+# Database Modeling:
 * host_info
   - id : SERIAL (PRIMARY KEY)
   - hostname : VARCHAR
@@ -85,7 +85,7 @@ To begin the project, we started by setting up our GitHub repo to save every ver
   - cpu_kernel : INT
   - disk_io : INT
   - disk_available : INT
-#Tests:
+# Tests:
 1. The psql_docker.sh script was tested by building and running the container and using docker ps -a to verify that this was the case. Tests were also done to make sure all the arguments were provided.
 
 2. The host_info and host_usage scripts were tested by compparing inserted data to the data from /proc/cpuinfo, free, lscpu, vmstat , and uname commands.
