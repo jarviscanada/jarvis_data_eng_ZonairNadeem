@@ -65,7 +65,7 @@ Technologies used listed :
 # Implementation:
 To begin the project, we started by setting up our GitHub repo to save every version of our project. Then we continued by setting up a docker instance for us to store our database. Then we proceeded to set up our tables where we would store the data received from our nodes. The next step was to code our script to fetch the required data from said nodes (host_info and host_usage). Once everything was verified and working, the crontab was implemented to periodically get the resource usage of the node. We could then proceed to create the SQL queries to filter the data and simplify the information received. Finally, we created the README file.
 
-#Scripts:
+# Scripts:
 - **psql_docker.sh**
   
     This scripts creates, start, or stop the docker container that holds the PSQL database
